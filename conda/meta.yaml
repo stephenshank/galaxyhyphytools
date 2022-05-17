@@ -1,0 +1,28 @@
+package:
+  name: galaxyhyphytools
+  version: '0.0.1'
+
+build:
+  number: 1
+
+source:
+  url: https://github.com/stephenshank/galaxyhyphytools/archive/v0.0.1.tar.gz
+
+requirements:
+  host:
+    - python >=3.6.6
+    - setuptools
+  run:
+    - python
+    - biopython >=1.79
+test:
+  commands:
+    - ght -h
+  imports:
+    - galaxyhyphytools
+
+about:
+  home: https://github.com/stephenshank/galaxyhyphytools
+  license: MIT
+  license_file: LICENSE
+  summary: 'A few bioinformatics utilities used on galaxy.hyphy.org'
