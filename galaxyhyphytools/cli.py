@@ -3,7 +3,8 @@ import argparse
 
 from .pluck import pluck_io
 from .hstack import hstack_io
-from .fastafilter import fastafilter_io
+from .fasta_filter import fasta_filter_io
+from .indicial_mapper import indicial_mapper_io
 
 
 DESCRIPTION = '''
@@ -90,29 +91,48 @@ def command_line_interface():
         required=True
     )
 
-    fastafilter_description = '''
+    fasta_filter_description = '''
         Filter a FASTA file according to various conditions.
     '''
-    fastafilter_subparser = subparsers.add_parser(
-        'fastafilter', description=fastafilter_description
+    fasta_filter_subparser = subparsers.add_parser(
+        'fasta_filter', description=fasta_filter_description
     )
-    fastafilter_subparser.set_defaults(func=fastafilter_cli)
-    fastafilter_subparser.add_argument(
+    fasta_filter_subparser.set_defaults(func=fasta_filter_cli)
+    fasta_filter_subparser.add_argument(
         '-i',
         '--input',
         help='input FASTA files',
         dest='input',
         required=True
     )
-    fastafilter_subparser.add_argument(
+    fasta_filter_subparser.add_argument(
         '-o', '--output', help='output FASTA file', dest='output', required=True
     )
-    fastafilter_subparser.add_argument(
+    fasta_filter_subparser.add_argument(
         '-I',
         '--id-regex',
         help='regular expression for IDs, keeping those that match',
         dest='idregex'
     )
+
+    indicial_mapper_description = '''
+        Map indices from a reference to a target in a pairwise alignment.
+    '''
+    indicial_mapper_subparser = subparsers.add_parser(
+        'indicial_mapper', description=indicial_mapper_description
+    )
+    indicial_mapper_subparser.set_defaults(func=indicial_mapper_cli)
+    indicial_mapper_subparser.add_argument(
+        '-i',
+        '--input',
+        help='input FASTA files',
+        dest='input',
+        required=True
+    )
+    indicial_mapper_subparser.add_argument(
+        '-o', '--output', help='output JSON file', dest='output', required=True
+    )
+
     args = main_parser.parse_args()
     args.func(args)
 
@@ -131,10 +151,17 @@ def hstack_cli(args):
     )
 
 
-def fastafilter_cli(args):
-    'Command line interface for fastafilter.'
-    fastafilter_io(
+def fasta_filter_cli(args):
+    'Command line interface for fasta_filter.'
+    fasta_filter_io(
         args.input, args.output, args.idregex
+    )
+
+
+def indicial_mapper_cli(args):
+    'Command line interface for indicial_mapper.'
+    indicial_mapper_io(
+        args.input, args.output
     )
 
 

@@ -6,10 +6,14 @@ Experimental library at the moment... use at your own risk!
 
 ## Installation
 
-### pip
+### Setuptools
+
+Coming soon to pip/PyPI.
 
 ```
-pip install galaxyhyphytools
+git clone https://github.com/stephenshank/galaxyhyphytools
+cd galaxyhyphytools
+python setup.py install
 ```
 
 ### conda
